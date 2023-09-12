@@ -3,7 +3,7 @@ from django.shortcuts import render
 # Create your views here.
 def show_main(request):
     context = {
-        'title' : 'The 48 Laws of Power',
+        'name' : 'The 48 Laws of Power',
         'author' : 'Robert Greene',
         'amount' : 48,
         'genre' : 'non-fiction',
