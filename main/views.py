@@ -1,6 +1,7 @@
 from django.http import HttpResponseRedirect
 from django.http import HttpResponse
 from django.core import serializers
+from django.contrib import messages
 from main.forms import BookForm
 from django.urls import reverse
 from django.shortcuts import render
@@ -10,8 +11,10 @@ from main.models import Book
 # Create your views here.
 def show_main(request):
     books = Book.objects.all()
+    quant = Book.objects.all().count()
     context = {
-        'books' : books
+        'books' : books,
+        'quant' : quant
     }
 
     return render(request, "main.html", context)
@@ -21,6 +24,7 @@ def book_entry(request):
 
     if form.is_valid() and request.method == "POST":
         form.save()
+        messages.success(request, 'book successfully added!')
         return HttpResponseRedirect(reverse('main:show_main'))
 
     context = {'form': form}
