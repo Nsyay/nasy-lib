@@ -1,23 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <style>
-            .tbl { 
-                border-collapse: collapse; 
-            }
-            .tbl th, .tbl td { 
-                padding: 5px; 
-                border: solid 1px #000; 
-            }
-            .tbl th { 
-                background-color: palevioletred; 
-            }
-        </style>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Nasy Lib</title>
-    </head>
-    <body style="background-color: lightpink;">
+{% extends 'base.html' %}
+
+{% block style %}
+<style>
+    .tbl { 
+        border-collapse: collapse; 
+    }
+    .tbl th, .tbl td { 
+        padding: 5px; 
+        border: solid 1px #000; 
+    }
+    .tbl th { 
+        background-color: #d87093; 
+    }
+    .tbl button {
+        border-radius: 63px;
+        background-color: #D87093;
+    }
+    </style>
+{% endblock style %}
+
+
+{% block content %}
         <h1>Nasy Lib</h1>
         
         <h5>Name: Ayu Siti Nasya N</h5>
@@ -30,14 +33,26 @@
                 <th>Amount</th>
                 <th>Genre</th>
                 <th>Description</th>
+                <th>Date Added</th>
               </tr>
-              <tr>
-                <td>{{ name }}</td>
-                <td>{{ author }}</td>
-                <td>{{ amount }}</td>
-                <td>{{ genre }}</td>
-                <td>{{ description }}</td>
-              </tr>
+
+            {% for product in products %}
+                <tr>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.author }}</td>
+                    <td>{{ product.amount }}</td>
+                    <td>{{ product.genre }}</td>
+                    <td>{{ product.description }}</td>
+                    <td>{{ product.date_added }}</td>
+                </tr>
+            {% endfor %}
         </table>
-    </body>
-</html>
+
+        <br />
+
+        <a href="{% url 'main:book_entry' %}">
+            <button>
+                Add New Book
+            </button>
+        </a>
+{% endblock content %}
