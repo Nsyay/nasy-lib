@@ -1,27 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <style>
-            .tbl { 
-                border-collapse: collapse; 
-            }
-            .tbl th, .tbl td { 
-                padding: 5px; 
-                border: solid 1px #000; 
-            }
-            .tbl th { 
-                background-color: palevioletred; 
-            }
-        </style>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Nasy Lib</title>
-    </head>
-    <body style="background-color: lightpink;">
+{% extends 'base.html' %}
+
+{% block style %}
+<style>
+    .tbl { 
+        border-collapse: collapse; 
+    }
+    .tbl th, .tbl td { 
+        padding: 5px; 
+        border: solid 1px #000; 
+    }
+    .tbl th { 
+        background-color: #d87093; 
+    }
+    .tbl button {
+        border-radius: 63px;
+        background-color: #D87093;
+    }
+    </style>
+{% endblock style %}
+
+
+{% block content %}
         <h1>Nasy Lib</h1>
         
         <h5>Name: Ayu Siti Nasya N</h5>
         <h5>Class: PBP A</h5>
+
+        <h3>*ੈ✩‧₊₊˚⊹♡ Ada {{ quant }} judul buku di Nasy Lib *ੈ✩‧₊₊˚⊹♡</h3>
 
         <table class="tbl" style="width:500px;">
             <tr>
@@ -30,14 +35,26 @@
                 <th>Amount</th>
                 <th>Genre</th>
                 <th>Description</th>
+                <th>Date Added</th>
               </tr>
-              <tr>
-                <td>{{ name }}</td>
-                <td>{{ author }}</td>
-                <td>{{ amount }}</td>
-                <td>{{ genre }}</td>
-                <td>{{ description }}</td>
-              </tr>
+
+            {% for book in books %}
+                <tr>
+                    <td>{{ book.name }}</td>
+                    <td>{{ book.author }}</td>
+                    <td>{{ book.amount }}</td>
+                    <td>{{ book.genre }}</td>
+                    <td>{{ book.description }}</td>
+                    <td>{{ book.date_added }}</td>
+                </tr>
+            {% endfor %}
         </table>
-    </body>
-</html>
+
+        <br />
+
+        <a href="{% url 'main:book_entry' %}">
+            <button>
+                Add New Book
+            </button>
+        </a>
+{% endblock content %}
