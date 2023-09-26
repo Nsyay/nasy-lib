@@ -26,9 +26,10 @@
         <h5>Name: Ayu Siti Nasya N</h5>
         <h5>Class: PBP A</h5>
 
-        <h3>*ੈ✩‧₊₊˚⊹♡ Ada {{ quant }} judul buku di Nasy Lib *ੈ✩‧₊₊˚⊹♡</h3>
+        <h3>Halo, {{ name }}</h3>
+        <h3>*ੈ✩‧₊₊˚⊹♡ Kamu memiliki {{ quant }} judul buku di Nasy Lib *ੈ✩‧₊₊˚⊹♡</h3>
 
-        <table class="tbl" style="width:500px;">
+        <table class="tbl" style="width:1500px;">
             <tr>
                 <th>Book Title</th>
                 <th>Author</th>
@@ -42,19 +43,45 @@
                 <tr>
                     <td>{{ book.name }}</td>
                     <td>{{ book.author }}</td>
-                    <td>{{ book.amount }}</td>
+                    <td align="center">
+                        <a href="{% url 'main:sub_amount' book.id%}">
+                            <button>
+                                -
+                            </button>
+                        </a>
+                        {{ book.amount }}
+                        <a href="{% url 'main:add_amount' book.id%}">
+                            <button>
+                                +
+                            </button>
+                        </a>
+                    </td>
                     <td>{{ book.genre }}</td>
                     <td>{{ book.description }}</td>
                     <td>{{ book.date_added }}</td>
+                    <td>
+                        <a href="{% url 'main:book_delete' book.id%}">
+                        <button>
+                            Delete
+                        </button>
+                        </a>
+                    </td>
                 </tr>
             {% endfor %}
         </table>
 
         <br />
 
+        <h5>Sesi terakhir login: {{ last_login }}</h5>
+
         <a href="{% url 'main:book_entry' %}">
             <button>
                 Add New Book
+            </button>
+        </a>
+        <a href="{% url 'main:logout' %}">
+            <button>
+                Logout
             </button>
         </a>
 {% endblock content %}
