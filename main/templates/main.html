@@ -2,85 +2,111 @@
 
 {% block style %}
 <style>
-    .tbl { 
-        border-collapse: collapse; 
+    .card-container {
+        display: flex;
+        grid-template-columns: repeat(4, 1fr);
+        row-gap: 3px;
+        column-gap: 3px;
     }
-    .tbl th, .tbl td { 
-        padding: 5px; 
-        border: solid 1px #000; 
+    .card{
+        width: 250px;
     }
-    .tbl th { 
-        background-color: #d87093; 
+    .card-button{
+        padding-top: 10px;
+        padding-bottom: 10px;
     }
-    .tbl button {
-        border-radius: 63px;
-        background-color: #D87093;
+    .btn1{
+        margin: 10px;
     }
+    .btn2{
+        margin: 10px;
+    }
+    .btn3{
+        margin: 10px;
+    }
+    button{
+        background-color: white;
+        border: 1px solid palevioletred;
+        color: palevioletred;
+        width: 40px;
+    }
+    button:hover{
+        background-color: lightpink;
+        border: 3 px solid #821243;
+        color: palevioletred;
+    }
+    .navbar{
+        background-color: palevioletred;
+    }
+    .head{
+        background-color: palevioletred;
+        width: 100vw;
+        padding: 10px;
+    }
+    
     </style>
 {% endblock style %}
 
 
 {% block content %}
-        <h1>Nasy Lib</h1>
-        
-        <h5>Name: Ayu Siti Nasya N</h5>
-        <h5>Class: PBP A</h5>
+        <div class="head">
+            <h1>Nasylib</h1>
+            <h3>Ayu Siti Nasya N - PBP A</h3>
+        </div>
 
-        <h3>Halo, {{ name }}</h3>
-        <h3>*ੈ✩‧₊₊˚⊹♡ Kamu memiliki {{ quant }} judul buku di Nasy Lib *ੈ✩‧₊₊˚⊹♡</h3>
+        <center>
+            <h3>Halo, {{ name }}</h3>
+            <h5>Sesi terakhir login: {{ last_login }}</h5>
+            <h3>*ੈ✩‧₊₊˚⊹♡ Kamu memiliki {{ quant }} judul buku di Nasy Lib *ੈ✩‧₊₊˚⊹♡</h3>
+        </center>
 
-        <table class="tbl" style="width:1500px;">
-            <tr>
-                <th>Book Title</th>
-                <th>Author</th>
-                <th>Amount</th>
-                <th>Genre</th>
-                <th>Description</th>
-                <th>Date Added</th>
-              </tr>
-
-            {% for book in books %}
-                <tr>
-                    <td>{{ book.name }}</td>
-                    <td>{{ book.author }}</td>
-                    <td align="center">
+        {% for book in books %}
+        <div class="card-container">
+            <div class="card">
+                    <div class="card-body">
+                        {% if forloop.last %}
+                            <h5 class="card-title" style="color: palevioletred;">{{ book.name }}</h5>
+                        {%else%} 
+                            <h5 class="card-title">{{ book.name }}</h5>
+                        {% endif %}
+                        <p class="card-text">{{ book.description }}</p>
+                    </div>
+                        <ul class="list-group list-group-flush">
+                        <li class="list-group-item">amount : {{ book.amount }}</li>
+                        <li class="list-group-item">genre : {{ book.genre }}</li>
+                        <li class="list-group-item">author : {{ book.author }}</li>
+                        <li class="list-group-item">{{ book.date_added }}</li>
+                    </ul>
+                    <div class="card-button">
+                        <center>
                         <a href="{% url 'main:sub_amount' book.id%}">
-                            <button>
+                            <button class="btn1">
                                 -
                             </button>
                         </a>
-                        {{ book.amount }}
                         <a href="{% url 'main:add_amount' book.id%}">
-                            <button>
+                            <button class="btn2">
                                 +
                             </button>
                         </a>
-                    </td>
-                    <td>{{ book.genre }}</td>
-                    <td>{{ book.description }}</td>
-                    <td>{{ book.date_added }}</td>
-                    <td>
                         <a href="{% url 'main:book_delete' book.id%}">
-                        <button>
-                            Delete
-                        </button>
+                            <button class="btn3">
+                                <i class="icon-trash"></i>
+                            </button>
                         </a>
-                    </td>
-                </tr>
-            {% endfor %}
-        </table>
-
-        <br />
-
-        <h5>Sesi terakhir login: {{ last_login }}</h5>
+                    </center>
+                    </div>
+            </div>
+        </div>
+        {% endfor %}
 
         <a href="{% url 'main:book_entry' %}">
-            <button>
+            <button style="width: 100px; height: 50px;">
                 Add New Book
             </button>
         </a>
         <a href="{% url 'main:logout' %}">
-            <button>
+            <button style="width: 100px; height: 50px;">
                 Logout
             </button>
         </a>

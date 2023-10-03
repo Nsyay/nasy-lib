@@ -6,40 +6,98 @@
 
 {% block content %}
 
-<div class = "login">
+<style>
+    .global-container{
+        display: flex;
+        height : 100%;
+        align-items: center;
+        justify-content: center;
+        padding-top: 120px;
+    }
+    
+    .login{
+        width: 400px;
+        height: 500px;
+        padding: 20px;
+        background-color: palevioletred;
+        border-radius: 6px;
+    }
 
-    <h1>Login</h1>
+    input{
+        background-color: white;
+        color: palevioletred;
+        border-radius: 4px;
+        width:380px;
+        height: 40px;
+    }
+    input[type=text]:focus {
+        border: 3px solid lightpink;
+    }
+    input[type=password]:focus {
+        border: 3px solid lightpink;
+    }
 
-    <form method="POST" action="">
-        {% csrf_token %}
-        <table>
-            <tr>
-                <td>Username: </td>
-                <td><input type="text" name="username" placeholder="Username" class="form-control"></td>
-            </tr>
-                    
-            <tr>
-                <td>Password: </td>
-                <td><input type="password" name="password" placeholder="Password" class="form-control"></td>
-            </tr>
+    input[type=submit]{
+        background-color: white;
+        color: palevioletred;
+        width: 100px;
+    }
+    input[type=submit]:hover{
+        background-color: lightpink;
+        border: 3 px solid #821243;
+        color: palevioletred;
+        width: 100px;
+    }
 
-            <tr>
-                <td></td>
-                <td><input class="btn login_btn" type="submit" value="Login"></td>
-            </tr>
-        </table>
-    </form>
+    th, td {
+        padding: 10px;
+        width: 360px;
+    }
 
-    {% if messages %}
-        <ul>
-            {% for message in messages %}
-                <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}     
+</style>
+<div class = "global-container">
+    <div class="card-login">
+        <center><iframe src="https://giphy.com/embed/kZqbBT64ECtjy" width="120" height="120" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/hello-kitty-cute-kZqbBT64ECtjy"></a></p></center>
+        <div class = "login">
         
-    Don't have an account yet? <a href="{% url 'main:register' %}">Register Now</a>
-
+            <h1><center>Login</center></h1>
+        
+            <form method="POST" action="">
+                {% csrf_token %}
+                <table>
+                    <tr>
+                        <td>Username: </td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" name="username" placeholder="Username" class="form-control"></td>
+                    </tr>
+                            
+                    <tr>
+                        <td>Password: </td>
+                    </tr>
+                    <tr>
+                        <td><input type="password" name="password" placeholder="Password" class="form-control"></td>
+                    </tr>
+        
+                    <tr>
+                        <td><center><input class="btn login_btn" type="submit" value="Login"></center></td>
+                    </tr>
+                </table>
+            </form>
+        
+            {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}     
+            
+            <center>Don't have an account yet? <a href="{% url 'main:register' %}">Register Now</a></center>
+        
+        </div>
+    </div>
 </div>
+
 
 {% endblock content %}

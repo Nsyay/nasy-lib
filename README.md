@@ -1,5 +1,34 @@
 ## nasy-lib
 [nasy-lib](https://nasy-lib.adaptable.app/main/)
+### Tugas 5
+1. Selector pada CSS terdapat tiga jenis, yaitu :
+* Element selector adalah cara untuk memilih sebuah elemen tipe tertentu pada HTML, seperti elemen h1, h2, p. Element selector cocok digunakan ketika kita ingin mengubah design dari sebuah elemen untuk semua elemen dengan tipe yang sama, seperti mengubah semua font color dari h1. pemanggilan element selector pada css yaitu langsung tipenya tanpa diawali simbol
+* ID selector adalah cara untuk memilih sebuah elemen yang sudah di assign dengan suatu id tertentu, dimana ID akan bersifat unik dalam satu halaman web. ID selector cocok digunakan ketika ingin mengubah design dari sebuah elemen hanya untuk elemen itu sendiri yang sudah di assign oleh ID unik. pemanggilan ID selector yaitu dengan diawali # kemudian diikuti nama id nya.
+* Class selector adalah cara yang sering saya gunakan, yaitu memilih beberapa elemen identik yang sudah di assign dengan suatu class tertentu agar dapat diubah-ubah designnya. Class selector cocok sigunakan ketika ingin mengubah design dari sebuah atau lebih properti yang memiliki karakteristik sama sehingga tampilannya juga akan sama. pemanggilan class selector yairu dengan diawali . kemudian diikuti nama classnya
+
+2. HTML5 adalah markup language terbaru yang digunakan untuk membuat website. HTML memiliki Tag yaitu berupa elemen yang dapat digunakan untuk mengembangkan isi-isi dari suatu website. Berikut saya akan menjelaskan beberapa tag di HTML5 terutama tag-tag yang telah saya gunakan pada tugas ini.
+* **div** = tag untuk mengelompokkan beberapa elemen atau properti agar dapat lebih mudah diatur designnya
+* **style** = tag yang membantu agar dapat menulis inline style css, tanpa membuat file css terpisah
+* **a** = tag yang akan membuat tautan ke halaman lain pada objek dalam tag a
+* **iframe** = tag yang berguna untuk memasukkan gambar atau potongan dari web lain ke dalam web saya
+* **table** = tag untuk membuat tabel agar data yang ditampilkan lebih rapih
+
+3. Margin dan padding adalah properti dalam CSS untuk mengatur spacing atau tata letak elemen. Namun, tentu keduanya memiliki perbedaan. Margin adalah properti yang mengatur jarak antara elemen dengan sisi-sisi di luar elemen tersebut. Biasanya margin digunakan untuk mengatur jarak antar elemen. Sedangkan padding adalah properti yang mengatur jarak antara suatu konten di dalam elemen dengan batas dari elemen tersebut, dengan kata lain padding mengatur tata letak atau jarak isi dari suatu elemen. Berikut saya lampirkan gambar untuk memperjelas perbedaan margin dan padding yang saya ambil dari website referensi saya
+referensi : [CSS margin vs padding](https://blog.hubspot.com/website/css-margin-vs-padding)
+![margin vs padding](<marpad.png>)
+
+4. Tailwind CSS dan Bootstrap adalah framework CSS yang sering digunakan web developer. Perbedaan dari Tailwind dan Bootstrap yaitu :
+* Tailwind CSS menggunakan konsep "utility-first CSS framework" yang berarti tailwind menyediakan berbagai utility class sehingga pengguna dapat membuat design tanpa harus menulis CSS. Sedangkan bootstrap merupakan "component-based framework" yang berarti untuk membangun suatu website dapat dengan mudah dilakukan dengan memanfaatkan komponen yang sudah tersedia. Beberapa komponen yang sudah tersedia juga menyediakan utility class yang dapat digunakan
+* Karena Tailwind CSS menggunakan konsep "utility-first" maka tailwind lebih unggul dalam kostumisasi ragam design yang dapat dibuat. sedangkan karena bootsrap merupakan "component-based" maka ragam design yang dapat dibuat lebih sedikit
+* Bootstrap sudah memiliki komponen dasar yang dapat mempercepat pembuatan proyek dbandingkan Tailwind CSS
+
+Berdasarkan beberapa perbandingan antara tailwind css dan bootstrap, saya dapat menyimpulkan kapan sebaiknya menggunakan tailwind css dan kapan sebaiknya menggunakan bootstrap.
+* Bootstrap sebaiknya digunakan untuk membangun website dengan tampilan sederhana dan hanya memiliki sedikit waktu
+* Tailwind CSS sebaiknya digunakan ketika ingin membangun website dengan tampilan yang jauh lebih unik karena fleksibilitas tailwind CSS.
+referensi : [tailwind css vc bootstrap](https://prismic.io/blog/tailwind-vs-bootstrap#why-compare-tailwind-vs-bootstrap)
+
+5. Pertama yang saya lakukan dalam mengimplementasi chekclist untuk tugas 5 yaitu dengan mempelajari terkait CSS dari berbagai sumber. Kemudian saya melakukan import script bootstrap di base.html. Setelah itu saya menerapkan in-line style CSS untuk halaman html login, register, book_entry, dan main. Saya menerapkan class selector dan element selector untuk implementasi modifikasi design website saya. Untuk main.html saya membuat looping untuk tiap data yang ada agar dimasukkan ke card yang telah saya buat, dan akan memberi warna berbeda pada judul buku apabila merupakan data terakhir
+
 ### Tugas 4
 user 1 : tsukxireii - pass : hlkt3456
 user 2 : usagi - pass : 7azman!a
