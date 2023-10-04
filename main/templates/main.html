@@ -4,12 +4,13 @@
 <style>
     .card-container {
         display: flex;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(4, 2fr);
         row-gap: 3px;
         column-gap: 3px;
     }
     .card{
         width: 250px;
+        margin: 20px;
     }
     .card-button{
         padding-top: 10px;
@@ -24,9 +25,17 @@
     .btn3{
         margin: 10px;
     }
+    .grid{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        /* align-items: stretch; */
+        padding: 30px;
+    }
     button{
         background-color: white;
         border: 1px solid palevioletred;
+        border-radius: 5px;
         color: palevioletred;
         width: 40px;
     }
@@ -35,8 +44,9 @@
         border: 3 px solid #821243;
         color: palevioletred;
     }
-    .navbar{
-        background-color: palevioletred;
+    .button-container{
+        display: flex;
+        justify-content: center;
     }
     .head{
         background-color: palevioletred;
@@ -55,59 +65,65 @@
         </div>
 
         <center>
+            <p></p>
             <h3>Halo, {{ name }}</h3>
             <h5>Sesi terakhir login: {{ last_login }}</h5>
             <h3>*ੈ✩‧₊₊˚⊹♡ Kamu memiliki {{ quant }} judul buku di Nasy Lib *ੈ✩‧₊₊˚⊹♡</h3>
+            <div class="button-container">
+                <a href="{% url 'main:book_entry' %}">
+                    <button style="width: 100px; height: 50px; margin:10px;">
+                        Add New Book
+                    </button>
+                </a>
+                <a href="{% url 'main:logout' %}">
+                    <button style="width: 100px; height: 50px; margin: 10px;">
+                        Logout
+                    </button>
+                </a>
+            </div>
         </center>
 
-        {% for book in books %}
-        <div class="card-container">
-            <div class="card">
-                    <div class="card-body">
-                        {% if forloop.last %}
-                            <h5 class="card-title" style="color: palevioletred;">{{ book.name }}</h5>
-                        {%else%} 
-                            <h5 class="card-title">{{ book.name }}</h5>
-                        {% endif %}
-                        <p class="card-text">{{ book.description }}</p>
-                    </div>
-                        <ul class="list-group list-group-flush">
-                        <li class="list-group-item">amount : {{ book.amount }}</li>
-                        <li class="list-group-item">genre : {{ book.genre }}</li>
-                        <li class="list-group-item">author : {{ book.author }}</li>
-                        <li class="list-group-item">{{ book.date_added }}</li>
-                    </ul>
-                    <div class="card-button">
-                        <center>
-                        <a href="{% url 'main:sub_amount' book.id%}">
-                            <button class="btn1">
-                                -
-                            </button>
-                        </a>
-                        <a href="{% url 'main:add_amount' book.id%}">
-                            <button class="btn2">
-                                +
-                            </button>
-                        </a>
-                        <a href="{% url 'main:book_delete' book.id%}">
-                            <button class="btn3">
-                                <i class="icon-trash"></i>
-                            </button>
-                        </a>
-                    </center>
-                    </div>
-            </div>
-        </div>
-        {% endfor %}
 
-        <a href="{% url 'main:book_entry' %}">
-            <button style="width: 100px; height: 50px;">
-                Add New Book
-            </button>
-        </a>
-        <a href="{% url 'main:logout' %}">
-            <button style="width: 100px; height: 50px;">
-                Logout
-            </button>
-        </a>
+            <div class="grid">
+                {% for book in books %}
+                <div class="card">
+                        <div class="card-body">
+                            {% if forloop.last %}
+                                <h5 class="card-title" style="color: palevioletred;">{{ book.name }}</h5>
+                            {%else%} 
+                                <h5 class="card-title">{{ book.name }}</h5>
+                            {% endif %}
+                            <p class="card-text">{{ book.description }}</p>
+                        </div>
+                            <ul class="list-group list-group-flush">
+                            <li class="list-group-item">amount : {{ book.amount }}</li>
+                            <li class="list-group-item">genre : {{ book.genre }}</li>
+                            <li class="list-group-item">author : {{ book.author }}</li>
+                            <li class="list-group-item">{{ book.date_added }}</li>
+                        </ul>
+                        <div class="card-button">
+                            <center>
+                            <a href="{% url 'main:sub_amount' book.id%}">
+                                <button class="btn1">
+                                    -
+                                </button>
+                            </a>
+                            <a href="{% url 'main:add_amount' book.id%}">
+                                <button class="btn2">
+                                    +
+                                </button>
+                            </a>
+                            <a href="{% url 'main:book_delete' book.id%}">
+                                <button class="btn3">
+                                    <i class="icon-trash"></i>
+                                </button>
+                            </a>
+                        </center>
+                        </div>
+                </div>
+                {% endfor %}
+            </div>
+
+
+        
 {% endblock content %}
