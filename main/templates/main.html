@@ -18,12 +18,15 @@
     }
     .btn1{
         margin: 10px;
+        border-radius: 15px;
     }
     .btn2{
         margin: 10px;
+        border-radius: 15px;
     }
     .btn3{
         margin: 10px;
+        border-radius: 15px;
     }
     .grid{
         display: flex;
@@ -33,9 +36,8 @@
         padding: 30px;
     }
     button{
-        background-color: white;
-        border: 1px solid palevioletred;
-        border-radius: 5px;
+        background-color: rgb(248, 222, 137);
+        border: 2px solid transparent; /* Set a transparent border */
         color: palevioletred;
         width: 40px;
     }
@@ -49,9 +51,20 @@
         justify-content: center;
     }
     .head{
-        background-color: palevioletred;
+        background-color: lightpink;
+        color: palevioletred;
         width: 100vw;
         padding: 10px;
+    }
+
+    .modal.fade .modal-header{
+        background-color: lightpink;
+        color: palevioletred;
+    }
+
+    .modal.fade .modal-footer{
+        background-color: lightpink;
+        color: palevioletred;
     }
     
     </style>
@@ -59,71 +72,129 @@
 
 
 {% block content %}
-        <div class="head">
-            <h1>Nasylib</h1>
-            <h3>Ayu Siti Nasya N - PBP A</h3>
-        </div>
+    <div class="head">
+        <h1>Nasylib</h1>
+        <h3>Ayu Siti Nasya N - PBP A</h3>
+    </div>
 
-        <center>
-            <p></p>
-            <h3>Halo, {{ name }}</h3>
-            <h5>Sesi terakhir login: {{ last_login }}</h5>
-            <h3>*ੈ✩‧₊₊˚⊹♡ Kamu memiliki {{ quant }} judul buku di Nasy Lib *ੈ✩‧₊₊˚⊹♡</h3>
-            <div class="button-container">
-                <a href="{% url 'main:book_entry' %}">
-                    <button style="width: 100px; height: 50px; margin:10px;">
-                        Add New Book
-                    </button>
-                </a>
-                <a href="{% url 'main:logout' %}">
-                    <button style="width: 100px; height: 50px; margin: 10px;">
-                        Logout
-                    </button>
-                </a>
-            </div>
-        </center>
-
-
-            <div class="grid">
-                {% for book in books %}
-                <div class="card">
-                        <div class="card-body">
-                            {% if forloop.last %}
-                                <h5 class="card-title" style="color: palevioletred;">{{ book.name }}</h5>
-                            {%else%} 
-                                <h5 class="card-title">{{ book.name }}</h5>
-                            {% endif %}
-                            <p class="card-text">{{ book.description }}</p>
-                        </div>
-                            <ul class="list-group list-group-flush">
-                            <li class="list-group-item">amount : {{ book.amount }}</li>
-                            <li class="list-group-item">genre : {{ book.genre }}</li>
-                            <li class="list-group-item">author : {{ book.author }}</li>
-                            <li class="list-group-item">{{ book.date_added }}</li>
-                        </ul>
-                        <div class="card-button">
-                            <center>
-                            <a href="{% url 'main:sub_amount' book.id%}">
-                                <button class="btn1">
-                                    -
-                                </button>
-                            </a>
-                            <a href="{% url 'main:add_amount' book.id%}">
-                                <button class="btn2">
-                                    +
-                                </button>
-                            </a>
-                            <a href="{% url 'main:book_delete' book.id%}">
-                                <button class="btn3">
-                                    <i class="icon-trash"></i>
-                                </button>
-                            </a>
-                        </center>
-                        </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Book Entry</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                {% endfor %}
+                <div class="modal-body">
+                    <form id="form" onsubmit="return false;">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="name" class="col-form-label">Title:</label>
+                            <input type="text" class="form-control" id="name" name="name"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="price" class="col-form-label">Amount:</label>
+                            <input type="number" class="form-control" id="amount" name="amount"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="price" class="col-form-label">Author:</label>
+                            <input type="text" class="form-control" id="author" name="author"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="price" class="col-form-label">Genre:</label>
+                            <input type="text" class="form-control" id="genre" name="genre"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="col-form-label">Description:</label>
+                            <textarea class="form-control" id="description" name="description"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button style="width: 100px; height: 50px; margin: 10px; border-radius: 5px;" type="button" data-bs-dismiss="modal">Close</button>
+                    <button style="width: 100px; height: 50px; margin: 10px; border-radius: 5px;" type="button" id="button_add" data-bs-dismiss="modal">Add Book</button>
+                </div>
             </div>
+        </div>
+    </div>
 
+    <center>
+        <p></p>
+        <h3>Halo, {{ name }}</h3>
+        <h5>Sesi terakhir login: {{ last_login }}</h5>
+        <h3>*ੈ✩‧₊₊˚⊹♡ Kamu memiliki {{ quant }} judul buku di Nasy Lib *ੈ✩‧₊₊˚⊹♡</h3>
+        <div class="button-container">
+            <button style="width: 100px; height: 50px; margin: 10px; border-radius: 5px;" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Add Book
+            </button>
+            <a href="{% url 'main:logout' %}">
+                <button style="width: 100px; height: 50px; margin: 10px; border-radius: 5px;">
+                    Logout
+                </button>
+            </a>
+        </div>
+    </center>
 
-        
+    <div id="cardContainer" class="grid"></div>
+
+    <script>
+        async function getBooks() {
+            return fetch("{% url 'main:get_book_json' %}").then((res) => res.json())
+        }
+        async function refreshProducts() {
+            document.getElementById("cardContainer").innerHTML = ""
+            const books = await getBooks()
+            books.forEach((item) => {
+                const card = document.createElement("div");
+                card.classList.add("card");
+                const cardContent = `
+                    <div class="card-body">
+                        <h5 class="card-title">${item.fields.name}</h5>
+                        <p class="card-text">${item.fields.description}</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Amount: ${item.fields.amount}</li>
+                        <li class="list-group-item">Genre: ${item.fields.genre}</li>
+                        <li class="list-group-item">Author: ${item.fields.author}</li>
+                    </ul>
+                    <div class="card-button">
+                        <center>
+                            <button class="btn3" onclick="deleteItem(${item.pk})">
+                                <i class="icon-trash"></i>
+                            </button>
+                        </center>
+                    </div>
+                `;
+
+                card.innerHTML = cardContent;
+                cardContainer.appendChild(card);
+            });
+        }
+        refreshProducts()
+
+        function addBook() {
+            fetch("{% url 'main:create_ajax' %}", {
+                method: "POST",
+                body: new FormData(document.querySelector('#form'))
+            }).then(refreshProducts)
+    
+            document.getElementById("form").reset()
+            return false
+        }
+        document.getElementById("button_add").onclick = addBook
+
+        function deleteItem(id){
+            fetch(`/book_delete/${id}/`, {
+                method : 'DELETE',
+                headers: {
+                    'X-CSRFToken': getCookie('csrftoken')
+                }
+            }).then(refreshProducts)
+        }
+
+        function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift();
+        }
+    </script>
 {% endblock content %}

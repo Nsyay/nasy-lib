@@ -1,5 +1,67 @@
 ## nasy-lib
 [nasy-lib](https://nasy-lib.adaptable.app/main/)
+
+### Tugas 6
+1. **Asynchronous programming** adalah cara mengelola tugas atau aliran eksekusi dimana sebuah program dapat melanjutkan eksekusi tanpa harus menunggu tugas lain untuk selesai. Sedangkan **Synchronous programming** adalah cara mengelola tugas atau aliran eksekusi dimana sebuah proram akan menunggu tugas yang saat ini sedang dikerjakan terlebih dahulu hingga selesai, baru melanjutkan tugas berikutnya.
+
+2. **Event-driven programming** adalah paradigma pemrograman yang aliran eksekusinya bergantung terhadap perlakuan dari eksternal seperti interaksi pengguna atau respons dari server. paradigma ini banyak diterapkan dalam pemrograman membuat website, dalam JavaScript dan AJAX contohnya. Pada tugas ini, saya menerapkan event-driven programming pada saat submit form modal
+```
+<button style="width: 100px; height: 50px; margin: 10px; border-radius: 5px;" type="button" id="button_add" data-bs-dismiss="modal">
+    Add Book
+</button>
+```
+dan pada bagian script
+```
+function addBook() {
+            fetch("{% url 'main:create_ajax' %}", {
+                method: "POST",
+                body: new FormData(document.querySelector('#form'))
+            }).then(refreshProducts)
+    
+            document.getElementById("form").reset()
+            return false
+        }
+        document.getElementById("button_add").onclick = addBook
+```
+Kode tersebut memberi kemampuan pada website agar ketika sudah mengisi form dan menekan tombol add book, data yang baru saja dimasukkan langsung ditampilkan di card pada main.html tanpa perlu refresh halaman
+
+3. Asynchronous programming pada AJAX memberi akses pada program untuk komunikasi dengan server website tanpa menghentikan eksekusi kode JavaScript. akses ini memungkikan suatu website untuk mengeksekusi banyak tugas secara bersamaan tanpa harus menunggu respons dari server. Contoh penerapan asynchronous programming pada AJAX yaitu penggunaan fungsi **Callback** atau **Promise**. Callback yaitu fungsi yang akan dipanggil ketika proses asynchronous selesai, sedangkan promise yaitu untuk program asynchronous yang dapat menentukan apa yang akan dieksekusi ketika promise berhasil maupun gagal. Selain itu ada juga XMLHttpRequest (berbasis callback) atau Fetch API (berbasis promise) untuk melakukan permintaan HTTP secara asynchronous. 
+
+4. **Fetch API** dan **library JQuery** keduanya merupakan bagian dari JavaScript yang mendukung pembuatan asynchronous HTTP request di situs website. Perbedaan dari Fetch API dan JQuery yaitu **Fetch API** adalah versi modern dari **library JQuery** yang lebih canggih dan mudah untuk dibuat. **Fetch API** akan dilakukan dengan menggunakan fungsi fetch() bawaan JavaScript. **Fetch API** akan membuat request dan dengan fungsi promise. Sedangkan JQuery merupakan library yang dapat memudahkan pembuatan asynchronous HTTP request dengan syntax yang lebih simpel. Perbedaan **Fetch API** dan **library JQuery** yaitu promise yang di return fungsi fetch() tidak akan reject meskipun responsenya error, akan ter-reject apabila terjadi kesalahan di internet misalnya. Sedangkan JQuery akan segera me-reject apabila responsenya error. <br>
+contoh penggunaan **Fetch API** :
+```
+function addBook() {
+            fetch("{% url 'main:create_ajax' %}", {
+                method: "POST",
+                body: new FormData(document.querySelector('#form'))
+            }).then(refreshProducts)
+    
+            document.getElementById("form").reset()
+            return false
+        }
+        document.getElementById("button_add").onclick = addBook
+```
+contoh penggunaan library Jquery :
+```
+$.ajax({
+  url: "/api/getWeather",
+  data: {
+    zipcode: 97201
+  },
+  success: function( result ) {
+    $( "#weather-temp" ).html( "<strong>" + result + "</strong> degrees" );
+  }
+});
+```
+Menurut saya, penggunaan **Fetch API** dan **library JQuery** harus disesuaikan dengan jenis projek yang ingin dibuat. jika ingin membuat situs website modern yang tidak digunakan di browser lama, maka lebih baik menggunakan Fetch API. Sedangkan jika ingin membuat projek yang bisa di support oleh semua jenis browser baik yang baru maupun yang lama, lebih baik menggunakan JQuery. <br>
+references : <br>
+* [jQuery](https://jquery.com/)
+* [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
+* [Mengenal JQuery dan contoh penggunaannya](https://www.biznetgio.com/en/news/mengenal-jquery-fungsi-dan-contoh-penggunaannya)
+
+5. Pertama yang saya lakukan dalam mengimplementasi chekclist untuk tugas 6 yaitu dengan mempelajari terkait ajax dan Fetch API. Kemudian, saya membuat modal sebagai form baru untuk menambah buku di main.html dengan memanfaatkan bootstrap. Tidak lupa saya juga mengganti button add book dengan button baru untuk memunculkan modal form book entry. Kemudian saya membuat fungsi baru pada views.py, yaitu fungsi menambahkan buku dengan AJAX dan fungsi get book json, setelah itu saya menambahkan routing untuk kedua fungsi tersebut di urls.py. Lalu saya membuat block script di main.html dan membuat fungsi getBooks untuk menampilkan data produk yang baru saja ditambahkan dengan Fetch API. Selain itu saya juga membuat fungsi refreshProducts untuk me-refresh data secara asynchronous tanpa harus me-refresh satu halaman website. Ada juga fungsi addBook untuk membuat data baru yang diambil dari form modal sebelumnya. Tak lupa juga menambahkan fungsi button onclick agar ketika button add book ditekan, akan langsung menjalankan fungsi addBook. <br>
+Untuk pengimplementasian soal bonus juga saya melakukan hal yang mirip dengan function addBook pada blok script, bedanya saya fetch url fungsi book_delete dari views.py, kemudian melakukan refreshProduct lagi.
+
 ### Tugas 5
 1. Selector pada CSS terdapat tiga jenis, yaitu :
 * Element selector adalah cara untuk memilih sebuah elemen tipe tertentu pada HTML, seperti elemen h1, h2, p. Element selector cocok digunakan ketika kita ingin mengubah design dari sebuah elemen untuk semua elemen dengan tipe yang sama, seperti mengubah semua font color dari h1. pemanggilan element selector pada css yaitu langsung tipenya tanpa diawali simbol
