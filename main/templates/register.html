@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% block meta %}
+    <title>Register</title>
+{% endblock meta %}
+
+{% block content %}  
+
+<style>
+    .global-container{
+        display: flex;
+        height : 100%;
+        align-items: center;
+        justify-content: center;
+        padding-top: 10px;
+    }
+    
+    .register{
+        width: 580px;
+        height: 600px;
+        padding: 10px;
+        background-color: palevioletred;
+        border-radius: 6px;
+    }
+
+    input{
+        background-color: white;
+        color: palevioletred;
+        border-color: lightpink;
+        border-radius: 4px;
+        width:380px;
+        height: 35px;
+    }
+
+    input[type=text]:focus {
+        border: 3px solid lightpink;
+    }
+    input[type=password]:focus {
+        border: 3px solid lightpink;
+    }
+
+    input[type=submit]{
+        background-color: white;
+        color: palevioletred;
+        width: 100px;
+    }
+    input[type=submit]:hover{
+        background-color: lightpink;
+        border: 3 px solid #821243;
+        color: palevioletred;
+        width: 100px;
+    }
+
+    th, td {
+        padding: 15px;
+        width: 100px;
+    }
+
+    table{
+        width: 200px;
+    }
+</style>
+
+<div class="global-container">
+    <div class="register-card">
+        <center><iframe src="https://giphy.com/embed/ZXfR65PpaPdv3XDNty" width="200" height="201" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/hellokitty-hello-kitty-sanrio-hellokitty45-ZXfR65PpaPdv3XDNty"></a></p></center>
+        <div class = "register">
+            
+            <h1><center>Register</center></h1>  
+        
+                <form method="POST" >  
+                    {% csrf_token %}  
+                    <table>  
+                        {{ form.as_table }}  
+                        <tr>  
+                            <td></td>
+                            <td><center><input type="submit" name="submit" value="Daftar"/></center></td>  
+                        </tr>  
+                    </table>  
+                </form>
+        
+            {% if messages %}  
+                <ul>   
+                    {% for message in messages %}  
+                        <li>{{ message }}</li>  
+                        {% endfor %}  
+                </ul>   
+            {% endif %}
+        
+        </div>  
+    </div>
+</div>
+
+
+{% endblock content %}
