@@ -1,5 +1,5 @@
 ## nasy-lib
-[nasy-lib](https://nasy-lib.adaptable.app/main/)
+[nasy-lib](ayu-siti21-tugas.pbp.cs.ui.ac.id)
 
 ### Tugas 6
 1. **Asynchronous programming** adalah cara mengelola tugas atau aliran eksekusi dimana sebuah program dapat melanjutkan eksekusi tanpa harus menunggu tugas lain untuk selesai. Sedangkan **Synchronous programming** adalah cara mengelola tugas atau aliran eksekusi dimana sebuah proram akan menunggu tugas yang saat ini sedang dikerjakan terlebih dahulu hingga selesai, baru melanjutkan tugas berikutnya.
