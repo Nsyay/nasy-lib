@@ -1,5 +1,5 @@
 from django.urls import path
-from main.views import show_main, book_entry, book_delete, add_amount, sub_amount, register, login_user, logout_user, show_xml, show_json, show_json_by_id, show_xml_by_id, get_book_json, create_ajax
+from main.views import *
 
 app_name = 'main'
 
@@ -17,5 +17,6 @@ urlpatterns = [
     path('add_amount/<str:pk>/', add_amount, name='add_amount'),
     path('sub_amount/<str:pk>/', sub_amount, name='sub_amount'),
     path('get-book/', get_book_json, name='get_book_json'),
-    path('entry-book-ajax/', create_ajax, name='create_ajax')
+    path('entry-book-ajax/', create_ajax, name='create_ajax'),
+    path('create-flutter/', create_product_flutter, name='create_product_flutter'),
 ]
