@@ -136,8 +136,10 @@ def create_product_flutter(request):
 
         new_product = Book.objects.create(
             user = request.user,
-            name = data["name"],
-            price = int(data["price"]),
+            name = data["title"],
+            amount = int(data["amount"]),
+            author = data["author"],
+            genre = data["genre"],
             description = data["description"]
         )
 
